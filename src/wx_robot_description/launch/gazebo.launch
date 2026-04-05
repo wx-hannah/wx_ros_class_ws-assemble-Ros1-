@@ -1,0 +1,18 @@
+<launch>
+  <!-- 启动Gazebo空世界 -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+  </include>
+
+  <!-- 加载你的 URDF -->
+  <param name="robot_description"
+    command="cat $(find wx_robot_description)/urdf/simple_robot.urdf" />
+
+  <!-- 自动生成机器人（抬高 0.1m，不会陷地里） -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+    args="-param robot_description -urdf -model my_robot -x 0 -y 0 -z 0.1" />
+
+</launch>
+

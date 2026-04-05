@@ -1,8 +1,0 @@
-prefix=/home/bcsh/wx_ros_class_ws/devel
-
-Name: my_package_pkg
-Description: Description of my_package_pkg
-Version: 0.0.0
-Cflags: -I/home/bcsh/wx_ros_class_ws/devel/include
-Libs: -L${prefix}/lib 
-Requires: roscpp rospy std_msgs dynamic_reconfigure geometry_msgs tf2_ros upros_message

@@ -1,8 +1,0 @@
-prefix=/home/bcsh/wx_ros_class_ws/devel
-
-Name: upros_message
-Description: Description of upros_message
-Version: 0.0.0
-Cflags: -I/home/bcsh/wx_ros_class_ws/devel/include
-Libs: -L${prefix}/lib 
-Requires: 

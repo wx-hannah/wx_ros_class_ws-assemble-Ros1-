@@ -1,2 +1,0 @@
-my_package_pkg:upros_message:wx_robot_description
--DCATKIN_DEVEL_PREFIX=/home/bcsh/wx_ros_class_ws/devel -DCMAKE_INSTALL_PREFIX=/home/bcsh/wx_ros_class_ws/install -G Unix Makefiles

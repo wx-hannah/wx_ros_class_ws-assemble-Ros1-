@@ -1,8 +1,0 @@
-prefix=/home/bcsh/wx_ros_class_ws/install
-
-Name: wx_robot_description
-Description: Description of wx_robot_description
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

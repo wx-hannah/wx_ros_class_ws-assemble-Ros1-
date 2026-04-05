@@ -2,13 +2,11 @@
 使用ROS2工程文件详见：
 https://github.com/wx-hannah/Topic-Service
 
-# 以下是另一个ros2工程文件的readme！！！！
+# 以下：另一个ros2工程文件的readme
 # 实验一：主题与消息实验——ros2！！
 #5.1标准消息
 cd ~/wx_ros_class_ws
 
-#先清理之前的编译缓存（可选，但建议执行）
-colcon build --cmake-clean-first --packages-select my_class_pkg
 
 #加载环境变量
 source install/setup.bash
@@ -18,6 +16,7 @@ ros2 run my_class_pkg ros_publisher_node
 
 #订阅话题：新建终端
 source ~/wx_ros_class_ws/install/setup.bash
+
 ros2 topic echo /my_topic
 
 
@@ -33,10 +32,12 @@ source install/setup.bash
 
 #第一步，终端1  发布者节点
 source ~/wx_ros_class_ws/install/setup.bash
+
 ros2 run my_class_pkg ros_publisher_node
 
 #第二步，终端2 运行订阅者节点
 source ~/wx_ros_class_ws/install/setup.bash
+
 ros2 run my_class_pkg ros_subscriber_node
 
 #5.3自定义消息
@@ -93,8 +94,8 @@ source ~/wx_ros_class_ws/install/setup.bash
 ros2 run my_class_pkg ros_action_server.py
 
 #启动动作节点
-
 source ~/wx_ros_class_ws/install/setup.bash
+
 ros2 run my_class_pkg ros_action_client.py
 
 
@@ -106,14 +107,20 @@ ros2 run my_class_pkg ros_action_client.py
 
 #新终端启动底盘
 cd upros_class_code
+
 catkin_make
+
 source devel/setup.bash
+
 roslaunch upros_bringup bringup_w2a.launch
 
 #编译此节点
 cd wx_ros_class_ws
+
 catkin_make
+
 source devel/setup.bash
+
 roscd my_package_pkg
 
 #1、开环控制走方格
@@ -132,7 +139,9 @@ roscd my_package_pkg
 
 #新终端 启动硬件
 cd upros_class_code
+
 source devel/setup.bash
+
 roslaunch upros_bringup bringup_w2a.launch
 
 #1、启动碰撞传感器避障
@@ -180,6 +189,7 @@ rosrun rqt_reconfigure rqt_reconfigure
 先要把ros_dynamic_speed_node.cpp文件中把/turtle1/cmd_vel删去turtle1变成/cmd_vel之后，重新编译
 #进入工作目录编译
 cd wx_ros_class_ws
+
 catkin_make
 
 #新建终端，启动底盘
@@ -237,27 +247,38 @@ rosrun rqt_joint_trajectory_controller rqt_joint_trajectory_controller
 
 启动小车底盘
 cd upros_class_code
+
 source devel/setup.bash
+
 roslaunch upros_bringup bringup_w2a.launch
 实验一、根据标定的颜色值，开展视觉巡线
 rosrun upros_cv color_choose.py标记颜色
 cd wx_ros_class_ws
+
 catkin_make
+
 source devel/setup.bash
+
 rosrun my_package_pkg follow_line.py
-新终端开始寻线rostopic pub -1 /enable_move std_msgs/Int16 "data: 1"
+
+#新终端开始巡线rostopic pub -1 /enable_move std_msgs/Int16 "data: 1"
 
 实验二、基于手势识别的机器人控制实验
 rosrun my_package_pkg gesture_movement.py
+
 新终端rqt_image_view，打开可视化界面然后订阅/image_result
 
 实验三、视觉跟踪实验
 rosrun my_package_pkg apriltag_follow.py
+
 新终端rqt_image_view，打开可视化界面然后订阅/image_result看见机器人跟随物块中心移动
 
 #实验四、视觉抓取实验
 #新终端运行节点
 cd upros_class_code
+
 source devel/setup.bash
+
 roslaunch upros_arm recognize_apriltag.launch
+
 rosrun my_package_pkg tag_grab_node

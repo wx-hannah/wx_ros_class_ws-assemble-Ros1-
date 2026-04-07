@@ -38,11 +38,11 @@ class ImageSubscriberNode:
                     # 声明一个速度控制消息
                     twist = Twist()
                     # 如果识别到的Tag在右侧，则右转
-                    if(center_x > width/2 + 20):
-                        twist.angular.z = -0.5
+                    if(center_x > width/2 + 25):
+                        twist.angular.z = -0.3
                     # 如果识别到的Tag在左侧，则左转
-                    elif(center_x < width/2 - 20):
-                        twist.angular.z = 0.5
+                    elif(center_x < width/2 - 25):
+                        twist.angular.z = 0.3
                     # 在中央则停止
                     else:
                         twist.angular.z = 0

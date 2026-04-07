@@ -44,20 +44,13 @@ int main(int argc, char **argv)
     tf2_ros::TransformListener listener(buffer);
     ROS_INFO("tf coordinate transforming....");
 
-    // 3. 安全获取 TF 坐标（找不到就报错退出）
-    geometry_msgs::TransformStamped tfs_1;
-    try {
-        tfs_1 = buffer.lookupTransform("arm_base_link", "tag_1", ros::Time(0), ros::Duration(3.0));
-    }
-    catch (tf2::TransformException &ex) {
-        ROS_ERROR("TF ERROR: %s", ex.what());
-        return 1;
-    }
+    // 获取tag到机械臂基坐标的坐标变换
+    geometry_msgs::TransformStamped tfs_1 = buffer.lookupTransform("arm_base_link", "tag_1", ros::Time(0), ros::Duration(100));
 
     // 4. 坐标计算
-    int x = -int(tfs_1.transform.translation.y * 1000);
-    int y = int(tfs_1.transform.translation.x * 1000) + 30;
-    int z = int(tfs_1.transform.translation.z * 1000 + 40);
+    int x = -int(tfs_1.transform.translation.y * 1000) - 15;
+    int y = int(tfs_1.transform.translation.x * 1000) + 50;
+    int z = int(tfs_1.transform.translation.z * 1000 + 60);
 
     // 5. 安全限制（防止超范围）
     x = limit(x, -120, 120);
@@ -67,7 +60,7 @@ int main(int argc, char **argv)
     ROS_INFO("Target POS: X=%d Y=%d Z=%d", x, y, z);
     std_srvs::Empty empty_srv;
 
-    // 6. 移动指令（无 speed / acc，适配你的机械臂）
+    // 6. 移动指令
     upros_message::ArmPosition move_srv;
     move_srv.request.x = x;
     move_srv.request.y = y;
@@ -81,6 +74,7 @@ int main(int argc, char **argv)
     // 移动到目标
     arm_move_open_client.call(move_srv);
     sleep(5.0);
+    ROS_INFO("STOP MOVE!!!!!!!!!!!!!!!!!!!!!!!");
 
     // 抓取
     arm_grab_client.call(empty_srv);

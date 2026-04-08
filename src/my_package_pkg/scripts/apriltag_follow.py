@@ -38,17 +38,19 @@ class ImageSubscriberNode:
                     # 声明一个速度控制消息
                     twist = Twist()
                     # 如果识别到的Tag在右侧，则右转
-                    if(center_x > width/2 + 20):
-                        twist.angular.z = -0.5
+                    if(center_x > width/2 + 25):
+                        twist.angular.z = -0.3
                     # 如果识别到的Tag在左侧，则左转
-                    elif(center_x < width/2 - 20):
-                        twist.angular.z = 0.5
+                    elif(center_x < width/2 - 25):
+                        twist.angular.z = 0.3
                     # 在中央则停止
                     else:
                         twist.angular.z = 0
                     # 识别到的apriltag面积小于 300 则前进
-                    if(area < 300):
-                        twist.linear.x = 0.3;
+                    if(area < 200):
+                        twist.linear.x = 0.2;
+                    else:
+                        twist.linear.x = 0;
                     self.vel_pub.publish(twist)
 
             ros_image = self.bridge.cv2_to_imgmsg(frame, "bgr8")

@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../wx_robot_description"
+		},
+		{
+			"path": "../../upros_message"
+		},
+		{
+			"path": ".."
+		}
+	]
+}

@@ -252,6 +252,7 @@ rosrun my_package_pkg gesture_movement.py
 新终端rqt_image_view，打开可视化界面然后订阅/image_result
 
 实验三、视觉跟踪实验
+chmod +x src/my_package_pkg/scripts/apriltag_follow.py
 rosrun my_package_pkg apriltag_follow.py
 新终端rqt_image_view，打开可视化界面然后订阅/image_result看见机器人跟随物块中心移动
 

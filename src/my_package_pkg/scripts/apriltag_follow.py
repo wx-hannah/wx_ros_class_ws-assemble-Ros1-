@@ -47,8 +47,10 @@ class ImageSubscriberNode:
                     else:
                         twist.angular.z = 0
                     # 识别到的apriltag面积小于 300 则前进
-                    if(area < 300):
-                        twist.linear.x = 0.3;
+                    if(area < 200):
+                        twist.linear.x = 0.2;
+                    else:
+                        twist.linear.x = 0;
                     self.vel_pub.publish(twist)
 
             ros_image = self.bridge.cv2_to_imgmsg(frame, "bgr8")

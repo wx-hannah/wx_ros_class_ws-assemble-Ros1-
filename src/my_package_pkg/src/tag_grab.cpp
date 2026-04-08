@@ -40,6 +40,12 @@ int main(int argc, char **argv)
     arm_zero_client.waitForExistence();
     ROS_INFO("All services connected!");
 
+
+
+    ROS_INFO("GO HOME FIRST! NO MOVE!");
+    std_srvs::Empty empty_srv;
+    arm_zero_client.call(empty_srv);
+    sleep(3.0);
     tf2_ros::Buffer buffer;
     tf2_ros::TransformListener listener(buffer);
     ROS_INFO("tf coordinate transforming....");
@@ -48,9 +54,9 @@ int main(int argc, char **argv)
     geometry_msgs::TransformStamped tfs_1 = buffer.lookupTransform("arm_base_link", "tag_1", ros::Time(0), ros::Duration(100));
 
     // 4. 坐标计算
-    int x = -int(tfs_1.transform.translation.y * 1000) - 15;
-    int y = int(tfs_1.transform.translation.x * 1000) + 50;
-    int z = int(tfs_1.transform.translation.z * 1000 + 60);
+    int x = -int(tfs_1.transform.translation.y * 1000);//y  direction
+    int y = int(tfs_1.transform.translation.x * 1000) ;
+    int z = int(tfs_1.transform.translation.z * 1000 + 40);
 
     // 5. 安全限制（防止超范围）
     x = limit(x, -120, 120);
@@ -58,7 +64,7 @@ int main(int argc, char **argv)
     z = limit(z, 50, 220);
 
     ROS_INFO("Target POS: X=%d Y=%d Z=%d", x, y, z);
-    std_srvs::Empty empty_srv;
+
 
     // 6. 移动指令
     upros_message::ArmPosition move_srv;

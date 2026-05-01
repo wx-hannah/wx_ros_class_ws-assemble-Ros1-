@@ -348,4 +348,68 @@ roslaunch upros_navigation view_nav.launch
 
 rosrun my_package_pkg movebase_client_node
 
-# 第七周 语音交互与大模型实验
+
+
+# 第七周 
+# 实验一语音交互与大模型实验
+
+#启动小车底盘
+cd upros_class_code
+
+source devel/setup.bash
+
+roslaunch upros_bringup bringup_w2a.launch
+
+#5.2 离线语音识别
+#进入脚本目录并赋予权限
+
+roscd my_package_pkg/scripts && chmod +x *.py && echo "OK: 脚本权限已开启"
+
+roslaunch upros_chat speech_to_word.launch
+
+#启动大模型回答节点
+rosrun my_package_pkg llm_chat.py
+
+#5.4 离线语音合成
+roslaunch upros_chat word_to_speech.launch
+
+rostopic pub -1 /robot_voice/llm/result std_msgs/String “您好我是智行” 
+#话题名修改了!!!!! 由此听到播报
+
+
+# 实验二、基于语音命令的抓取实验
+
+#终端 1: 底盘通信
+roslaunch upros_bringup bringup_w2a.launch
+
+#终端 2: 语音识别
+roslaunch upros_chat speech_to_word.launch
+
+#终端 3: 视觉识别
+roslaunch upros_arm recognize_apriltag.launch
+
+#终端 4: 语义解析
+rosrun my_package_pkg voice_control.py
+
+#终端 5: 抓取驱动
+rosrun my_package_pkg tag_grab_node
+
+# 实验三、基于语音命令的导航实验
+
+#终端 1: 底盘通信
+roslaunch upros_bringup bringup_w2a.launch
+
+#终端 2: 语音识别
+roslaunch upros_chat speech_to_word.launch
+
+#终端3：启动导航
+roslaunch upros_navigation navigation.launch
+
+roslaunch upros_navigation view_nav.launch
+
+
+#终端 4: 语义解析
+rosrun my_package_pkg voice_control.py
+
+#终端 5: 驱动语音导航
+rosrun my_package_pkg voice_nav_node

@@ -283,3 +283,69 @@ source devel/setup.bash
 roslaunch upros_arm recognize_apriltag.launch
 
 rosrun my_package_pkg tag_grab_node
+
+
+
+# 第六周:惯性测量单元(IMU)与自主导航实验
+
+#启动小车底盘
+cd upros_class_code
+
+source devel/setup.bash
+
+roslaunch upros_bringup bringup_w2a.launch
+
+#实验一 惯性测量单元传感器实验
+#编写节点订阅 IMU 传感器信息
+cd wx_ros_class_ws
+
+source devel/setup.bash
+
+rosrun my_package_pkg ros_imu_node
+
+#5.2 编写节点实现基于 IMU 的自旋控制
+rosrun my_package_pkg ros_imu_rotate_node
+
+
+#实验二、激光雷达驱动实验
+#5.5激光雷达信息 ROS 获取
+令打印出激光雷达五个点的距离：
+rosrun my_package_pkg ros_scan_node
+
+#5.6 激光雷达角度屏蔽
+
+rviz
+
+查看雷达屏蔽示意图
+
+选择 /scan 下的LaserScan，并且订阅查看laser_link
+
+
+#5.7激光雷达避障
+cd wx_ros_class_ws
+
+catkin_make
+
+roslaunch upros_bringup bringup_w2a.launch
+
+rosrun my_package_pkg ros_avoid_node
+
+
+#实验三 建图导航实验
+#5.2 机器人定位导航实验
+
+source devel/setup.bash
+
+#搬回建图起点并依次启动节点（需在不同的新终端中运行）
+
+roslaunch upros_bringup bringup_w2a.launch
+
+roslaunch upros_navigation navigation.launch
+
+roslaunch upros_navigation view_nav.launch
+
+#运行上述节点，完成机器人到几个待观测点的遍历。
+
+rosrun my_package_pkg movebase_client_node
+
+# 第七周 语音交互与大模型实验

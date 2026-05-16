@@ -413,3 +413,27 @@ rosrun my_package_pkg voice_control.py
 
 #终端 5: 驱动语音导航
 rosrun my_package_pkg voice_nav_node
+
+
+# 期末考核
+tag识别播报：
+
+roslaunch upros_bringup bringup_w2a.launch
+
+roslaunch upros_arm recognize_apriltag.launch
+
+roslaunch upros_chat word_to_speech.launch
+
+##rosrun my_package_pkg tag_voice_node
+
+
+
+导航：
+
+roslaunch upros_navigation navigation.launch
+
+roslaunch upros_navigation view_nav.launch
+
+启动最终节点：
+
+rosrun my_package_pkg tag_nav_node

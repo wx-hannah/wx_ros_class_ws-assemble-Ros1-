@@ -74,7 +74,6 @@ target_link_libraries(move_forward ${catkin_LIBRARIES})
 add_executable(odom_move src/odom_move.cpp)
 target_link_libraries(odom_move ${catkin_LIBRARIES})
 
-add_dependencies(tag_grab_node ${catkin_EXPORTED_TARGETS} ${${PROJECT_NAME}_gencpp})
 
 add_executable(ros_scan_node src/ros_scan.cpp)
 target_link_libraries(ros_scan_node ${catkin_LIBRARIES})
@@ -90,3 +89,10 @@ target_link_libraries(voice_nav_node ${catkin_LIBRARIES})
 add_dependencies(voice_nav_node ${${PROJECT_NAME}_EXPORTED_TARGETS})
 
 include_directories(include ${catkin_INCLUDE_DIRS})
+
+add_executable(tag_voice_node src/tag_voice.cpp)
+target_link_libraries(tag_voice_node ${catkin_LIBRARIES})
+
+add_executable(tag_nav_node src/tag_nav.cpp)
+target_link_libraries(tag_nav_node ${catkin_LIBRARIES})
+
